@@ -3,8 +3,24 @@
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import './sign-up-form.styles.scss';
+import { useState } from 'react';
+
+const defaultValues = {
+  displayName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
 
 const SignUpForm = () => {
+
+  const [ formFields, setFormFields ] = useState(defaultValues);
+  const {displayName, email, password, confirmPassword } = formFields;
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({...formFields, [name]: value});
+  }
 
   return (
     <div className='sign-up-container'>
@@ -16,7 +32,9 @@ const SignUpForm = () => {
           inputOptions = {{
             type: 'text',
             required: true,
-            name: 'displayName'
+            name: 'displayName',
+            value: displayName,
+            onChange: handleChange
           }}/>
 
         <FormInput 
@@ -24,7 +42,9 @@ const SignUpForm = () => {
           inputOptions = {{
             type: 'email',
             required: true,
-            name: 'email'
+            name: 'email',
+            value: email,
+            onChange: handleChange
           }}/>
 
         <FormInput 
@@ -32,7 +52,9 @@ const SignUpForm = () => {
           inputOptions = {{
             type: 'password',
             required: true,
-            name: 'password'
+            name: 'password',
+            value: password,
+            onChange: handleChange
           }}/>
 
         <FormInput 
@@ -40,7 +62,9 @@ const SignUpForm = () => {
           inputOptions = {{
             type: 'password',
             required: true,
-            name: 'confirmPassword'
+            name: 'confirmPassword',
+            value: confirmPassword,
+            onChange: handleChange
           }}/>
         <Button type="submit">Sign up</Button>
   
