@@ -1,15 +1,18 @@
 
-import React from 'react';
+import React, { Fragment, useContext } from 'react';
+import { CategoriesContext } from '../../context/categories.context';
+
+
 const Contact = () => {
 
   return(
-    <h1>This is the contact page</h1>
+    <Fragment>
+      <h1>This is the contact page</h1>
+    </Fragment>
   )
 }
 
 
-export const Shop = () =>  {
-  return (<h2>This is the</h2>)
-}
+
 
 export default Contact;

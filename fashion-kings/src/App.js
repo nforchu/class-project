@@ -5,8 +5,9 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './routes/navigation/navigation.component';
 import Home from './routes/home/home.component';
-import  Contact, {Shop } from './routes/contact/contact.component';
+import  Contact from './routes/contact/contact.component';
 import Authentication from './routes/authentication/authentication.component';
+import Shop from './routes/shop/shop.component';
 
 const App = () => {
     return (
