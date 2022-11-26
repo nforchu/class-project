@@ -1,6 +1,6 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ProductCard from '../../components/product-card/product-cart.component';
+import ProductCard from '../../components/product-card/product-card.component';
 import { CategoriesContext } from '../../context/categories.context';
 import './category.styles.scss';
 
@@ -12,7 +12,7 @@ const Category = () => {
   useEffect(() => {
     const selectedCat = categories.find(({title}) => title.toLowerCase() == category);
     setProducts(selectedCat.items);
-  }, [])
+  }, [category, categories]);
 
 
   return (

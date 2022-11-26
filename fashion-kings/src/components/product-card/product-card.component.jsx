@@ -1,13 +1,14 @@
+import { useContext } from 'react';
+import { CartContext } from '../../context/cart.context';
 import Button from '../button/button.component';
 import './product-card.styles.scss';
 
 const ProductCard = ({product}) => {
 
   const {name, price, imageUrl} = product;
+  const {addItemToCart} = useContext(CartContext);
 
-  const addProductHandler = () => {
-    console.log('Adding product to cart')
-  }
+  const addProductHandler = () => addItemToCart(product);
 
   return (
     <div className='product-card-container'> 
