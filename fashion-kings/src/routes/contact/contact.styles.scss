@@ -1,0 +1,42 @@
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  margin: 30px auto;
+
+  .image-container {
+    width: 350px;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+  }
+
+  .content {
+    width: 800px;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form {
+    width: 500px;
+  }
+
+  .info {
+    width: 250px;
+    
+    .contact {
+      border-top: 1px dashed #b4b1b1;
+    }
+
+    .address {
+      margin-top: 40px;
+      border-top: 1px dashed #b4b1b1;
+
+      .address-item {
+        display: block;
+      }
+    }
+  }
+}

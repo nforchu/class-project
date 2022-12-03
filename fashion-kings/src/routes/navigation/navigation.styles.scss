@@ -10,9 +10,19 @@
 
   .logo-container {
     height: 100%;
-    width: 70px;
+    width: 300px;
     padding: 25px;
+    display: flex;
+    justify-content: space-between;
+
+    .site-name {
+      font-weight: bold;
+      font-size: 30px;
+      color: #afaeae;
+    }
   }
+
+
 
   .nav-links-container {
     width: 50%;
