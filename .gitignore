@@ -21,3 +21,37 @@
 /fashion-kings/npm-debug.log*
 /fashion-kings/yarn-debug.log*
 /fashion-kings/yarn-error.log*
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/fashion-kings-core/src/main/**/target/
+!**/fashion-kings-core/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/fashion-kings-core/nbproject/private/
+/fashion-kings-core//nbbuild/
+/fashion-kings-core//dist/
+/fashion-kings-core//nbdist/
+/fashion-kings-core//.nb-gradle/
+build/
+!**/fashion-kings-core/src/main/**/build/
+!**/fashion-kings-core/src/test/**/build/
+
+### VS Code ###
+/fashion-kings-core/.vscode/

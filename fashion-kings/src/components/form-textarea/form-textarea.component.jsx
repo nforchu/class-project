@@ -14,6 +14,9 @@ const FormTextarea = ({label, inputOptions}) => {
       )
       }
       
+      <textarea>
+        dsfasfddasfda
+      </textarea>
     </div>
     
   )
