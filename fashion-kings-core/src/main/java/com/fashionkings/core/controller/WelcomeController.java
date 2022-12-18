@@ -1,4 +1,4 @@
-package com.fashionkings.core.demo.controller;
+package com.fashionkings.core.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +10,8 @@ public class WelcomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String welcome() {
+    	//do processing
         return "welcome";
     }
+    
 }

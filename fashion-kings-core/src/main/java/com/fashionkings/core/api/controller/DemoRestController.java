@@ -1,4 +1,4 @@
-package com.fashionkings.core.demo.api.controller;
+package com.fashionkings.core.api.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

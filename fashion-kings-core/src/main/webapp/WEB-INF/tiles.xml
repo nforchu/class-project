@@ -8,15 +8,24 @@
     <definition name="standard.index" template="/WEB-INF/layout/standard.jsp">
 
     </definition>
+    
+    <definition name="product-list" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/product/product-list.jsp"/>
+    </definition>
+    
 
     <definition name="simple.index" template="/WEB-INF/layout/simple.jsp">
 
     </definition>
 
-    <definition name="welcome" extends="simple.index">
-        <put-attribute name="body" value="/WEB-INF/pages/welcome.jsp"/>
-    </definition>
+    <definition name="welcome" template="/WEB-INF/pages/welcome.jsp">
+        
+    </definition>   
     
+    
+    <definition name="user-list" extends="standard.index">
+         <put-attribute name="body" value="/WEB-INF/pages/users/user-list.jsp"/>
+    </definition>
     
     <definition name="category-form" extends="standard.index">
         <put-attribute name="body" value="/WEB-INF/pages/category/category-form.jsp" />
