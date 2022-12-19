@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 public class FashionKingsCoreApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FashionKingsCoreApplication.class, args);
+		ApplicationContext apc =  SpringApplication.run(FashionKingsCoreApplication.class, args);
+		//for(String name: apc.getBeanDefinitionNames())
+		//	System.out.println(name);
 	}
 }

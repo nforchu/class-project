@@ -13,7 +13,12 @@
 	</div>
 	<div class="container-fluid">
 		<div class=navigation>
-			Home | Categories | Products | Orders | Users
+			<a href="/login">Home</a>
+			<a href="/category/list">Categories</a>
+			<a href="/product/list">Products</a>
+			<a href="/login">Orders</a>
+			<a href="/login">Users</a>
+			
 		</div>
         <div class="row pt-2">
             <div class="column side vh-100">

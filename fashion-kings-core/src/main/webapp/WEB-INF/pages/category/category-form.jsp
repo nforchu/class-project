@@ -6,12 +6,12 @@
 
 <div class="container">
     <h3>Category form</h3>    
-    <form action = "/category" method = "POST">
-      <input type="hidden" 
+    <form action = "/category/form" method = "POST">
+      <input type="text" 
       	name="id"
-      	required
+      	
       	class="form-control" 
-      	value="" 
+      	value="0" 
       	id="categoryId">
       	
 	  <div class="mb-3">
