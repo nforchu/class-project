@@ -1,11 +1,25 @@
 package com.fashionkings.core.jpa;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "categories")
 public class Category {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "category_id")
 	private long id;
 	
+	@Column(name = "title")
 	private String title;
 	
+	@Column(name = "description")
 	private String description;
 
 	public long getId() {

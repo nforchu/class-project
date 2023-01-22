@@ -22,7 +22,7 @@
 		</div>
         <div class="row pt-2">
             <div class="column side vh-100">
-            	left menu
+            	<tiles:insertAttribute name="menu" />
             </div>
             <div class="column middle">
                 <tiles:insertAttribute name="body" />

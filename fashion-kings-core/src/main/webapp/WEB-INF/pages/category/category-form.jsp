@@ -7,7 +7,7 @@
 <div class="container">
     <h3>Category form</h3>    
     <form action = "/category/form" method = "POST">
-      <input type="text" 
+      <input type="hidden" 
       	name="id"
       	
       	class="form-control" 
@@ -20,8 +20,7 @@
 	    	name="title"
 	    	required
 	    	class="form-control" 
-	    	id="categoryTitle"
-	    	value="s">	   
+	    	id="categoryTitle">	   
 	  </div>
 	  
 	  <div class="mb-3">
