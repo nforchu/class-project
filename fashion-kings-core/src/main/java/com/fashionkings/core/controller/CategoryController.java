@@ -1,5 +1,7 @@
 package com.fashionkings.core.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,12 @@ import com.fashionkings.core.util.MenuMap;
 @Controller
 @RequestMapping("category")
 public class CategoryController {
-	
+
 	private CategoryService categoryService;
-	
-	
+
 	private CategoryRepository categoryRepository;
 
+	
 	public CategoryController(CategoryService categoryService, CategoryRepository categoryRepository) {
 		this.categoryService = categoryService;
 		this.categoryRepository = categoryRepository;
@@ -49,7 +51,7 @@ public class CategoryController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(Model model) {
-		Category[] categoryList = categoryService.allCategories();
+		List<Category> categoryList = categoryService.allCategories();
 		model.addAttribute("categories", categoryList);
 		model.addAttribute("menu", buildMenu());
 		return "category-list";

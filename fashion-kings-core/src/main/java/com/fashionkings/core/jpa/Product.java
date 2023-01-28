@@ -2,16 +2,12 @@ package com.fashionkings.core.jpa;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "products")
@@ -51,4 +47,121 @@ public class Product {
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<OrderItem> orderItems = new ArrayList();
+	
+	@ManyToMany(cascade = {
+		    CascadeType.PERSIST,
+		    CascadeType.MERGE,
+		    CascadeType.REFRESH
+		})
+	@JoinTable(name = "product_categories",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+	private Set<Category> categories = new HashSet();
+
+	public long getId() {
+		return id;
+	}
+
+	public Product setId(long id) {
+		this.id = id;
+		return this;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public Product setTitle(String title) {
+		this.title = title;
+		return this;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public Product setStatus(String status) {
+		this.status = status;
+		return this;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Product setDescription(String description) {
+		this.description = description;
+		return this;
+	}
+
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public Product setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+		return this;
+	}
+
+	public int getDiscountPercent() {
+		return discountPercent;
+	}
+
+	public Product setDiscountPercent(int discountPercent) {
+		this.discountPercent = discountPercent;
+		return this;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public Product setPrice(double price) {
+		this.price = price;
+		return this;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+	
+	
+	
 }
