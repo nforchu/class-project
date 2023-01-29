@@ -1,24 +1,8 @@
 package com.fashionkings.core.dto;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.Arrays;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-public class Product {
+public class Product extends Object{
 
     private long id;
     private String title;
@@ -90,6 +74,13 @@ public class Product {
 
 	public void setCategories(long[] categories) {
 		this.categories = categories;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", stockQuantity="
+				+ stockQuantity + ", discountPercent=" + discountPercent + ", price=" + price + ", categories="
+				+ Arrays.toString(categories) + "]";
 	}	
 	
 	

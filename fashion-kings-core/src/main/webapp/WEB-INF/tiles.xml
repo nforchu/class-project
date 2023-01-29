@@ -48,5 +48,9 @@
     <definition name="product-list" extends="standard.index">
         <put-attribute name="body" value="/WEB-INF/pages/product/product-list.jsp" />
     </definition>
+    
+    <definition name="product" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/product/product.jsp" />
+    </definition>
 
 </tiles-definitions>

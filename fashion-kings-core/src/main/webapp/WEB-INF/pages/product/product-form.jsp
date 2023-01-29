@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="row">
-   <form action = "/product" method = "POST">
+   <form action = "/product/form" method = "POST">
          <h3>${title}</h3>
          
          <br />
