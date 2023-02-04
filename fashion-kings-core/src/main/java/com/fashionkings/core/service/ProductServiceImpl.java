@@ -43,7 +43,17 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product update(Product product, long[] categoryIds) {
-		// TODO Auto-generated method stub
+		Optional<Product> optional = productRepo.findById(product.getId());
+		if(optional.isEmpty()) {
+			throw new RuntimeException("NOT FOUND");
+		}
+	
+		Product prod = optional.get().setTitle(product.getTitle())
+				 .setPrice(product.getPrice())
+				 .setDescription(product.getDescription())
+				 .setDiscountPercent(product.getDiscountPercent())
+				 .setStockQuantity(product.getStockQuantity());
+		
 		return null;
 	}
 

@@ -51,8 +51,18 @@ public class ProductController {
 		return "product-form";
 	}
 	
+	@RequestMapping(value = "form/{id}", method = RequestMethod.GET)
+	public String edit(Model model, @PathVariable long id) {
+		com.fashionkings.core.jpa.Product product = productService.get(id);
+		model.addAttribute("menu", buildMenu())
+             .addAttribute("title" , "Add a new product")
+             .addAttribute("product", product)	
+             .addAttribute("categories", categoryService.allCategories());
+		return "product-form";
+	}
+	
 	@RequestMapping(value = "form", method = RequestMethod.POST)
-	public String addProduct(Model model, @ModelAttribute Product product) {
+	public String addOrUpdate(Model model, @ModelAttribute Product product) {
 		com.fashionkings.core.jpa.Product jpaProduct = new com.fashionkings.core.jpa.Product();
 		jpaProduct.setId(product.getId()) 
 			.setTitle(product.getTitle())  
@@ -60,7 +70,11 @@ public class ProductController {
 			.setDescription(product.getDescription())    			
 			.setStockQuantity(product.getStockQuantity())
 			.setDiscountPercent(product.getDiscountPercent());
-		jpaProduct = productService.add(jpaProduct, product.getCategories());
+		if(product.getId() > 0) {
+			jpaProduct = update(jpaProduct, product.getCategories());
+		} else {
+			jpaProduct = add(jpaProduct, product.getCategories());
+		}
 		
 		model.addAttribute("menu", buildMenu());
 		model.addAttribute("product", jpaProduct);
@@ -74,6 +88,14 @@ public class ProductController {
 			.addPair("List Products", "/product/list")
 			.addPair("New Product", "/product/form");
 		return menuMap;
+	}
+	
+	private com.fashionkings.core.jpa.Product add(com.fashionkings.core.jpa.Product product, long[] categoryIds){
+		return productService.add(product, categoryIds);
+	}
+	
+	private com.fashionkings.core.jpa.Product update(com.fashionkings.core.jpa.Product product, long[] categoryIds){
+		return productService.update(product, categoryIds);
 	}
 	
 }

@@ -11,7 +11,7 @@
       	name="id"
       	
       	class="form-control" 
-      	value="0" 
+      	value="${category.getId()}" 
       	id="categoryId">
       	
 	  <div class="mb-3">
@@ -20,7 +20,8 @@
 	    	name="title"
 	    	required
 	    	class="form-control" 
-	    	id="categoryTitle">	   
+	    	id="categoryTitle"
+	    	value="${category.getTitle()}" >	   
 	  </div>
 	  
 	  <div class="mb-3">
@@ -28,7 +29,7 @@
 	    <textarea 
 	    	name="description"
 	    	class="form-control" 
-    		id="categoryDescription"></textarea>
+    		id="categoryDescription">${category.getDescription()}</textarea>
 	  </div>	  
 	  <input type="submit" value="Save" class="btn btn-secondary"/>
 	  <input type="submit" value="Save and add another" class="btn btn-secondary"/>

@@ -3,7 +3,7 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    
+   
 
     <definition name="standard.index" template="/WEB-INF/layout/standard.jsp">
 		<put-attribute name="menu"  value="/WEB-INF/fragments/menu.jsp"/>
@@ -38,6 +38,10 @@
     <definition name="category-details" extends="standard.index">
         <put-attribute name="body" value="/WEB-INF/pages/category/category-details.jsp" />
     </definition>
+
+	<definition name="category-delete" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/category/category-delete.jsp" />
+    </definition>
     
     
     
@@ -52,5 +56,4 @@
     <definition name="product" extends="standard.index">
         <put-attribute name="body" value="/WEB-INF/pages/product/product.jsp" />
     </definition>
-
 </tiles-definitions>
