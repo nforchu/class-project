@@ -1,8 +1,13 @@
 package com.fashionkings.core.dto;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class Product extends Object{
+import com.fashionkings.core.jpa.Category;
+
+public class ProductDTO extends Object{
 
     private long id;
     private String title;
@@ -10,13 +15,14 @@ public class Product extends Object{
     private int stockQuantity;
     private int discountPercent;
     private double price;
-	private long[] categories;
+	private List<Long> categoryIds;
+	private Set<Category> categories = new HashSet<>();
 
     public long getId() {
         return id;
     }
 
-    public Product setId(long id) {
+    public ProductDTO setId(long id) {
         this.id = id;
         return this;
     }
@@ -25,7 +31,7 @@ public class Product extends Object{
         return title;
     }
 
-    public Product setTitle(String title) {
+    public ProductDTO setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -34,7 +40,7 @@ public class Product extends Object{
 		return description;
 	}
 
-	public Product setDescription(String description) {
+	public ProductDTO setDescription(String description) {
 		this.description = description;
 		return this;
 	}
@@ -45,7 +51,7 @@ public class Product extends Object{
 		return stockQuantity;
 	}
 
-	public Product setStockQuantity(int stockQuantity) {
+	public ProductDTO setStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
 		return this;
 	}
@@ -54,7 +60,7 @@ public class Product extends Object{
 		return discountPercent;
 	}
 
-	public Product setDiscountPercent(int discountPercent) {
+	public ProductDTO setDiscountPercent(int discountPercent) {
 		this.discountPercent = discountPercent;
 		return this;
 	}
@@ -63,16 +69,26 @@ public class Product extends Object{
 		return price;
 	}
 
-	public Product setPrice(double price) {
+	public ProductDTO setPrice(double price) {
 		this.price = price;
 		return this;
 	}
 
-	public long[] getCategories() {
+	
+
+	public List<Long> getCategoryIds() {
+		return categoryIds;
+	}
+
+	public void setCategoryIds(List<Long> categoryIds) {
+		this.categoryIds = categoryIds;
+	}
+
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(long[] categories) {
+	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
 
@@ -80,7 +96,7 @@ public class Product extends Object{
 	public String toString() {
 		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", stockQuantity="
 				+ stockQuantity + ", discountPercent=" + discountPercent + ", price=" + price + ", categories="
-				+ Arrays.toString(categories) + "]";
+				+ categoryIds+ "]";
 	}	
 	
 	

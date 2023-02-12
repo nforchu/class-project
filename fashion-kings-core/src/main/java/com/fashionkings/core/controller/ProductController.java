@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.fashionkings.core.dto.Product;
+import com.fashionkings.core.dto.ProductDTO;
 import com.fashionkings.core.service.CategoryService;
 import com.fashionkings.core.service.ProductService;
 import com.fashionkings.core.util.MenuMap;
+
 
 @Controller
 @RequestMapping("product")
@@ -19,15 +20,17 @@ public class ProductController {
 	private CategoryService categoryService;
 	private ProductService productService;
 	
-	public ProductController(CategoryService categoryService, ProductService productService) {
+	public ProductController(CategoryService categoryService,
+			ProductService productService) {
 		super();
 		this.categoryService = categoryService;
 		this.productService = productService;
+				
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public String get(Model model, @PathVariable long id) {
-		com.fashionkings.core.jpa.Product product = productService.get(id);
+		ProductDTO product = productService.get(id);
         model.addAttribute("title" , product.getTitle());
         model.addAttribute("product", product);
         model.addAttribute("menu", buildMenu());
@@ -46,14 +49,14 @@ public class ProductController {
 	public String form(Model model) {
 		model.addAttribute("menu", buildMenu());
         model.addAttribute("title" , "Add a new product");
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new ProductDTO());
         model.addAttribute("categories", categoryService.allCategories());
 		return "product-form";
 	}
 	
 	@RequestMapping(value = "form/{id}", method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable long id) {
-		com.fashionkings.core.jpa.Product product = productService.get(id);
+		ProductDTO product = productService.get(id);
 		model.addAttribute("menu", buildMenu())
              .addAttribute("title" , "Add a new product")
              .addAttribute("product", product)	
@@ -62,23 +65,17 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "form", method = RequestMethod.POST)
-	public String addOrUpdate(Model model, @ModelAttribute Product product) {
-		com.fashionkings.core.jpa.Product jpaProduct = new com.fashionkings.core.jpa.Product();
-		jpaProduct.setId(product.getId()) 
-			.setTitle(product.getTitle())  
-			.setPrice(product.getPrice())
-			.setDescription(product.getDescription())    			
-			.setStockQuantity(product.getStockQuantity())
-			.setDiscountPercent(product.getDiscountPercent());
+	public String addOrUpdate(Model model, @ModelAttribute ProductDTO product) {
+		System.out.println(product);
 		if(product.getId() > 0) {
-			jpaProduct = update(jpaProduct, product.getCategories());
+			product = update(product);
 		} else {
-			jpaProduct = add(jpaProduct, product.getCategories());
+			product = add(product);
 		}
 		
 		model.addAttribute("menu", buildMenu());
-		model.addAttribute("product", jpaProduct);
-		return String.format("redirect:/product/%s", jpaProduct.getId());
+		model.addAttribute("product", product);
+		return String.format("redirect:/product/%s", product.getId());
 	}
 	
 	private MenuMap buildMenu()
@@ -90,12 +87,12 @@ public class ProductController {
 		return menuMap;
 	}
 	
-	private com.fashionkings.core.jpa.Product add(com.fashionkings.core.jpa.Product product, long[] categoryIds){
-		return productService.add(product, categoryIds);
+	private ProductDTO add(ProductDTO product){
+		return productService.add(product);
 	}
 	
-	private com.fashionkings.core.jpa.Product update(com.fashionkings.core.jpa.Product product, long[] categoryIds){
-		return productService.update(product, categoryIds);
+	private ProductDTO update(ProductDTO product){
+		return productService.update(product);
 	}
 	
 }

@@ -2,12 +2,14 @@ package com.fashionkings.core.service;
 
 import java.util.Collection;
 
+import com.fashionkings.core.dto.ProductDTO;
 import com.fashionkings.core.jpa.Product;
+
 
 public interface ProductService {
 
 	Collection<Product> getProducts();
-    Product get(long id);
-    Product add(Product product, long[] categoryIds);
-    Product update(Product product, long[] categoryIds);
+    ProductDTO get(long id);
+    ProductDTO add(ProductDTO product);
+    ProductDTO update(ProductDTO product);
 }

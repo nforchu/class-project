@@ -1,34 +1,37 @@
 package com.fashionkings.core.controller;
 
+import java.io.IOException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fashionkings.core.jpa.Category;
-import com.fashionkings.core.repository.CategoryRepository;
 import com.fashionkings.core.service.CategoryService;
-import com.fashionkings.core.service.CategoryServiceImpl;
+import com.fashionkings.core.util.FileUtil;
 import com.fashionkings.core.util.MenuMap;
 
 @Controller
 @RequestMapping("category")
 public class CategoryController {
-
-	private CategoryService categoryService;
-
-	private CategoryRepository categoryRepository;
-
 	
-	public CategoryController(CategoryService categoryService, CategoryRepository categoryRepository) {
+	@Value("${app.category.upload.path}")
+	private String destFolder;
+	private CategoryService categoryService;
+	private FileUtil fileUtil;
+	
+	public CategoryController(CategoryService categoryService, FileUtil fileUtil) {
 		this.categoryService = categoryService;
-		this.categoryRepository = categoryRepository;
+		this.fileUtil = fileUtil;
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
@@ -96,7 +99,20 @@ public class CategoryController {
 		return "redirect:/category/list";
 	}
 	
+	@RequestMapping(value = "{id}/upload", method = RequestMethod.POST)
+	public String upload(@PathVariable long id, @RequestParam("file") MultipartFile file) throws IOException {
+		String filename = file.getOriginalFilename();
+		filename = fileUtil.save(destFolder, filename, file.getBytes());
+		categoryService.saveCover(id, filename);
+		return String.format("redirect:/category/%s", id);
+	}
 	
+	@RequestMapping(value = "images/{filename:.+}")
+	@ResponseBody
+	public byte[] getCover(@PathVariable String filename) throws IOException {
+		Resource resource = fileUtil.load(destFolder, filename);
+		return resource.getInputStream().readAllBytes();
+	}
 	
 	private Category add(Category category) {
     	return categoryService.add(category);

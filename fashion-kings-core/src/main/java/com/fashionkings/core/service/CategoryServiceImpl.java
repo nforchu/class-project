@@ -1,6 +1,5 @@
 package com.fashionkings.core.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +16,7 @@ public class CategoryServiceImpl implements CategoryService{
 	public CategoryServiceImpl(CategoryRepository categoryRepository) {
 		super();
 		this.categoryRepository = categoryRepository;
+		
 	}
 
 
@@ -62,6 +62,14 @@ public class CategoryServiceImpl implements CategoryService{
 			throw new RuntimeException("NOT FOUND");
 		}
 		categoryRepository.delete(optional.get());
+	}
+
+
+	@Override
+	public void saveCover(long id, String filename) {
+		Category cat = categoryRepository.findById(id).orElseThrow();
+		cat.setCover(filename);
+		categoryRepository.save(cat);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.fashionkings.core.jpa;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,25 +9,49 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 
 
 @Entity
 @Table(name = "categories")
+@SequenceGenerator(name = "categories_sequence", initialValue = 23) 
+@SQLDelete(sql = "UPDATE categories SET deleted = true WHERE category_id = ?")
+@Where(clause = "deleted=false")
 public class Category {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categories_sequence")
 	@Column(name = "category_id")
 	private long id;
 	
 	@Column(name = "title")
 	private String title;
 	
+	
+	@Column(name = "cover")
+	private String cover;
+	
 	@Column(name = "description")
+	@Lob
 	private String description;
+	
+	@Column(name = "created")
+	private Date  created;
+	
+	@Column(name = "updated")
+	private Date updated;
+	
+	@Column(name = "deleted")
+	private boolean deleted = Boolean.FALSE;
 	
 	@ManyToMany(mappedBy = "categories")
 	private List<Product> products = new ArrayList<>();
@@ -43,10 +68,44 @@ public class Category {
 	public String getTitle() {
 		return title;
 	}
+	
 
 	public Category setTitle(String title) {
 		this.title = title;
 		return this;
+	}
+
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public String getDescription() {
@@ -71,6 +130,17 @@ public class Category {
 		return "Category [id=" + id + ", title=" + title + ", description=" + description + "]";
 	}
 
+	
+	@PrePersist
+	public void prePersist() {
+		this.created = new Date(System.currentTimeMillis());
+		this.deleted = false;
+	}
+	
+    @PreUpdate
+    public void preUpdate () {
+    	this.updated = new Date(System.currentTimeMillis());
+    }
 	
 	
 

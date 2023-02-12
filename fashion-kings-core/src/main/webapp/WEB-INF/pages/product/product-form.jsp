@@ -20,7 +20,8 @@
       			<c:forEach items="${categories}" var="category">
       				<div class="col-2"> 
       					<input type="checkbox" 
-	      					name="categories" 
+	      					name="categoryIds" 
+	      					${product.getCategoryIds().contains(category.getId()) ? 'checked="checked"': ''}
 	      					value="${category.id}" 
 	      					id="categories${category.getId() }">
 	      				<label for="categories${category.id }">${category.getTitle() }</label>

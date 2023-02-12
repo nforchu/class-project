@@ -16,7 +16,7 @@
 		<c:forEach var="category" items="${categories}" >
 			<tr>
 				<td>${category.getTitle()}</td>
-          		<td>${category.getDescription()}</td>
+          		<td class="text text-truncate">${category.getDescription()}</td>
           		<td>active</td>
           		<td>
           			<a class="btn btn-sm btn-warning" href="<c:out value="/category/form/${category.id}"/>">Edit</a>
