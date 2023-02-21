@@ -8,9 +8,14 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 
 @Entity
 @Table(name = "products")
+@SQLDelete(sql= "UPDATE products SET deleted = true WHERE product_id = ?")
+@Where(clause = "deleted = false")
 public class Product {
 	
 	@Id
@@ -25,7 +30,11 @@ public class Product {
 	private String status;
 
 	@Column(name = "description")
+	@Lob
 	private String description;
+	
+	@Column(name = "image")
+	private String image;
 	
 	@Column(name = "quantity")
     private int stockQuantity;
@@ -93,6 +102,15 @@ public class Product {
 	public Product setDescription(String description) {
 		this.description = description;
 		return this;
+	}
+
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public int getStockQuantity() {

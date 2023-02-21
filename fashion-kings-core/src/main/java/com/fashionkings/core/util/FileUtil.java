@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class FileUtil {
 
 	public String save(String destFolder, String filename, byte[] bytes) throws IOException {
-		String[] parts  = filename.split("\\.");
+		String[] parts  = filename.split("\\.");  //[books, jpg] //books.jpg
 		String extension = parts[parts.length -1];
 		long time = System.currentTimeMillis();
 		filename = String.format("%s.%s",  time, extension);

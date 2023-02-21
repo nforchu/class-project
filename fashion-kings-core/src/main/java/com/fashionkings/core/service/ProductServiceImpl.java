@@ -88,4 +88,17 @@ public class ProductServiceImpl implements ProductService{
 		return productDTO;
 	}
 
+	@Override
+	public void saveImage(long id, String filename) {
+		Product product = productRepo.findById(id).orElseThrow();
+		product.setImage(filename);
+		productRepo.save(product);
+	}
+
+	@Override
+	public void delete(long id) {
+		Product product = productRepo.findById(id).orElseThrow();
+		productRepo.delete(product);
+	}
+
 }

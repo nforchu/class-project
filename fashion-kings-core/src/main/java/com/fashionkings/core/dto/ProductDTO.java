@@ -14,6 +14,7 @@ public class ProductDTO extends Object{
     private String description;
     private int stockQuantity;
     private int discountPercent;
+    private String image;
     private double price;
 	private List<Long> categoryIds;
 	private Set<Category> categories = new HashSet<>();
@@ -63,6 +64,16 @@ public class ProductDTO extends Object{
 	public ProductDTO setDiscountPercent(int discountPercent) {
 		this.discountPercent = discountPercent;
 		return this;
+	}
+	
+	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public double getPrice() {

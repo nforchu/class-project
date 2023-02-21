@@ -36,7 +36,11 @@
     </definition>
 
     <definition name="category-details" extends="standard.index">
-        <put-attribute name="body" value="/WEB-INF/pages/category/category-details.jsp" />
+        <put-attribute name="body">
+        	<definition template="/WEB-INF/pages/category/category-details.jsp">
+        		<put-attribute name="imageUpload" value="/WEB-INF/fragments/image-upload.jsp" />
+        	</definition>
+        </put-attribute>
     </definition>
 
 	<definition name="category-delete" extends="standard.index">
@@ -54,6 +58,10 @@
     </definition>
     
     <definition name="product" extends="standard.index">
-        <put-attribute name="body" value="/WEB-INF/pages/product/product.jsp" />
+        <put-attribute name="body">
+        	<definition template="/WEB-INF/pages/product/product.jsp">
+        		<put-attribute name="imageUpload" value="/WEB-INF/fragments/image-upload.jsp" />
+        	</definition>
+        </put-attribute>
     </definition>
 </tiles-definitions>

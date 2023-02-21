@@ -36,10 +36,16 @@ public class CategoryController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public String getDetails(Model model, @PathVariable long id) {
-		System.out.println("method called");
-		model.addAttribute("category", categoryService.getById(id));
+		Category cat = categoryService.getById(id);
+		model.addAttribute("category", cat);
 		model.addAttribute("menu", buildMenu());
+		model.addAttribute("path", "/category/"+cat.getId());
+		model.addAttribute("image", cat.getCover());
+		
+		
 		return "category-details";
+		
+	
 	}
 	
 	
@@ -71,6 +77,7 @@ public class CategoryController {
 		model.addAttribute("category", category);
 		model.addAttribute("title", String.format("Edit category: %s ", category.getTitle()));
 		model.addAttribute("menu", buildMenu());
+			 
 		return "redirect:/category/"+category.getId();
 	}
 	
@@ -107,7 +114,7 @@ public class CategoryController {
 		return String.format("redirect:/category/%s", id);
 	}
 	
-	@RequestMapping(value = "images/{filename:.+}")
+	@RequestMapping(value = "{id}/images/{filename:.+}")
 	@ResponseBody
 	public byte[] getCover(@PathVariable String filename) throws IOException {
 		Resource resource = fileUtil.load(destFolder, filename);
