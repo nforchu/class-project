@@ -1,5 +1,6 @@
 package com.fashionkings.core.service;
 
+import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.fashionkings.core.dto.ProductDTO;
@@ -99,6 +102,13 @@ public class ProductServiceImpl implements ProductService{
 	public void delete(long id) {
 		Product product = productRepo.findById(id).orElseThrow();
 		productRepo.delete(product);
+	}
+
+	@Override
+	public Page<Product> browse(int pageNumber) {
+		PageRequest pageRequest = PageRequest.of(pageNumber,5);
+		Page<Product> jpaPage = productRepo.findAll(pageRequest);
+		return jpaPage;
 	}
 
 }

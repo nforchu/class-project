@@ -3,20 +3,25 @@ package com.fashionkings.core.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fashionkings.core.jpa.Category;
+import com.fashionkings.core.jpa.Product;
 import com.fashionkings.core.repository.CategoryRepository;
+import com.fashionkings.core.repository.ProductRepository;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
 	
 	private CategoryRepository categoryRepository;
+	private ProductRepository productRepo;
 
-	public CategoryServiceImpl(CategoryRepository categoryRepository) {
+	public CategoryServiceImpl(CategoryRepository categoryRepository,
+			ProductRepository productRepo) {
 		super();
 		this.categoryRepository = categoryRepository;
-		
+		this.productRepo = productRepo;
 	}
 
 
@@ -70,6 +75,12 @@ public class CategoryServiceImpl implements CategoryService{
 		Category cat = categoryRepository.findById(id).orElseThrow();
 		cat.setCover(filename);
 		categoryRepository.save(cat);
+	}
+
+
+	@Override
+	public List<Product> getPreviewProducts(long categoryId, Pageable pageable) {
+		return productRepo.findPreviewProducts(categoryId, pageable);
 	}
 
 }

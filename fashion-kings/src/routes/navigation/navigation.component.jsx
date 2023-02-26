@@ -26,6 +26,7 @@ const Navigation = () => {
        </Link>
 
         <div className="nav-links-container">
+          <Link className="nav-link" to={'browse'}>Browse</Link>
           <Link className="nav-link" to={'shop'}>Shop</Link>
           <Link className="nav-link" to={'contact'}>Contact</Link>
           {
