@@ -3,6 +3,8 @@ package com.fashionkings.core.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +83,13 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public List<Product> getPreviewProducts(long categoryId, Pageable pageable) {
 		return productRepo.findPreviewProducts(categoryId, pageable);
+	}
+
+
+	@Override
+	public Page<Product> getProducts(long categoryId, int pageNumber) {
+		Pageable paging = PageRequest.of(pageNumber, 30);
+		return productRepo.findProducts(categoryId, paging);
 	}
 
 }

@@ -1,23 +1,25 @@
-import { Fragment, useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card.component';
-import { CategoriesContext } from '../../context/categories.context';
+import { getProductsByCategory } from '../../services/category-service';
 import './category.styles.scss';
 
 const Category = () => {
   const {category} = useParams();
-  const {categories} = useContext(CategoriesContext);
   const [products, setProducts] = useState([]);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const selectedCat = categories.find(({title}) => title.toLowerCase() == category);
-    setProducts(selectedCat.items);
-  }, [category, categories]);
+    getProductsByCategory(category).then(data => {
+      console.log(data.content)
+      setProducts(data.content);
+    });
+  }, []);
 
 
   return (
     <Fragment>
-      <h2 className='category-title'>{category.toUpperCase()}</h2>
+      <h2 className='category-title'>{searchParams.get('title').toUpperCase()}</h2>
       
       <div className='category-container'>
       {

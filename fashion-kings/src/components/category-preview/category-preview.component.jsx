@@ -4,10 +4,13 @@ import './category-preview.styles.scss';
 
 
 const CategoryPrview = ({category}) => {
-  const { title, items } = category;
+  const { title, products, id } = category;
   const navigate = useNavigate();
 
-  const onNavigateHandler = () => navigate(`${title.toLowerCase()}`)
+  const onNavigateHandler = () => navigate({
+    pathname: `${id}`,
+    search: `?title=${title}`
+  });
   
   return(
    <div className="category-preview-container">
@@ -17,7 +20,7 @@ const CategoryPrview = ({category}) => {
 
     <div className="preview">
       {
-        items.filter((_, index) => index < 4)
+        products.filter((_, index) => index < 4)
         .map((product, idx) => <ProductCard key={idx} product={product}/>)
       }
     </div>

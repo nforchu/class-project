@@ -3,6 +3,7 @@ package com.fashionkings.core.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,5 +20,11 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 			 + "INNER JOIN p.categories c "
 			 + "WHERE c.id = :catId ") 
 	List<Product> findPreviewProducts(long catId, Pageable pageable);
+	
+	
+	@Query(value = "SELECT p FROM Product p "
+			+ "INNER JOIN p.categories c "
+			+ "WHERE c.id = :catId ")
+	Page<Product> findProducts(long catId, Pageable pageable);
 
 }

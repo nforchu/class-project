@@ -19,7 +19,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.beans.BeanUtils;
 
+import com.fashionkings.core.dto.CategoryDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -146,6 +148,12 @@ public class Category {
     	this.updated = new Date(System.currentTimeMillis());
     }
 	
+    
+    public CategoryDTO toDTO(Category category) {
+    	CategoryDTO dto = new CategoryDTO();
+    	BeanUtils.copyProperties(this, dto, "product");
+    	return dto;
+    }
 	
 
 }

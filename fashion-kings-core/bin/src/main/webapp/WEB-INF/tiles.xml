@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+   
+
+    <definition name="standard.index" template="/WEB-INF/layout/standard.jsp">
+		<put-attribute name="menu"  value="/WEB-INF/fragments/menu.jsp"/>
+    </definition>
+    
+    <definition name="product-list" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/product/product-list.jsp"/>
+    </definition>
+    
+
+    <definition name="simple.index" template="/WEB-INF/layout/simple.jsp">
+
+    </definition>
+
+    <definition name="welcome" template="/WEB-INF/pages/welcome.jsp">
+        
+    </definition>   
+    
+    
+    <definition name="user-list" extends="standard.index">
+         <put-attribute name="body" value="/WEB-INF/pages/users/user-list.jsp"/>
+    </definition>
+    
+    <definition name="category-form" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/category/category-form.jsp" />
+    </definition>
+
+    <definition name="category-list" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/category/category-list.jsp" />
+    </definition>
+
+    <definition name="category-details" extends="standard.index">
+        <put-attribute name="body">
+        	<definition template="/WEB-INF/pages/category/category-details.jsp">
+        		<put-attribute name="imageUpload" value="/WEB-INF/fragments/image-upload.jsp" />
+        	</definition>
+        </put-attribute>
+    </definition>
+
+	<definition name="category-delete" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/category/category-delete.jsp" />
+    </definition>
+    
+    
+    
+    <definition name="product-form" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/product/product-form.jsp" />
+    </definition>
+
+    <definition name="product-list" extends="standard.index">
+        <put-attribute name="body" value="/WEB-INF/pages/product/product-list.jsp" />
+    </definition>
+    
+    <definition name="product" extends="standard.index">
+        <put-attribute name="body">
+        	<definition template="/WEB-INF/pages/product/product.jsp">
+        		<put-attribute name="imageUpload" value="/WEB-INF/fragments/image-upload.jsp" />
+        	</definition>
+        </put-attribute>
+    </definition>
+</tiles-definitions>

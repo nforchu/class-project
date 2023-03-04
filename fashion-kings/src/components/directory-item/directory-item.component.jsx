@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import './directory-item.styles.scss';
 
 const DirectoryItem  = ({item}) => {
-  const { title, cover, id, route } = item;
+  const { title, cover, id } = item;
   const navigate = useNavigate();
-  const onNavigateHandler = () => navigate(route)
+  const onNavigateHandler = () => navigate(`shop/${id}?title=${title}`);
 
   return(
     <div onClick={onNavigateHandler}  className="directory-item-container">

@@ -10,6 +10,9 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.beans.BeanUtils;
+
+import com.fashionkings.core.dto.ProductDTO;
 
 
 @Entity
@@ -195,6 +198,10 @@ public class Product {
     	this.created = new Date(System.currentTimeMillis());
     }
 	
-	
+	public ProductDTO toDTO(Product product) {
+		ProductDTO dto = new ProductDTO();
+		BeanUtils.copyProperties(product, dto, "categories");
+		return dto;
+	}
 	
 }
