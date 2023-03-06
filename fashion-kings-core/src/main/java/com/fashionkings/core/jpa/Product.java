@@ -58,7 +58,7 @@ public class Product {
 	private boolean deleted = Boolean.FALSE;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<OrderItem> orderItems = new ArrayList();
+	private List<OrderItem> orderItems = new ArrayList<>();
 	
 	@ManyToMany(cascade = {
 		    CascadeType.PERSIST,
@@ -69,7 +69,7 @@ public class Product {
     joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-	private Set<Category> categories = new HashSet();
+	private Set<Category> categories = new HashSet<>();
 
 	public long getId() {
 		return id;
@@ -174,6 +174,18 @@ public class Product {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
+	
+
+	public void addOrderItem(OrderItem orderItem) {
+		orderItems.add(orderItem);
+		orderItem.setProduct(this);
+	}
+
+	public void removeOrderItem(OrderItem orderItem) {
+		orderItems.remove(orderItem);
+		orderItem.setProduct(null);
+	}
+	
 
 	public Set<Category> getCategories() {
 		return categories;

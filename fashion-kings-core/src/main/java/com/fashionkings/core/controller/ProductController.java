@@ -66,7 +66,9 @@ public class ProductController {
 		model.addAttribute("menu", buildMenu());
         model.addAttribute("title" , "Add a new product");
         model.addAttribute("product", new ProductDTO());
+        
         model.addAttribute("categories", categoryService.allCategories());
+        
 		return "product-form";
 	}
 	
