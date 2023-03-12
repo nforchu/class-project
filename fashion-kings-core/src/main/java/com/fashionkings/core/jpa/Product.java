@@ -13,6 +13,7 @@ import org.hibernate.annotations.Where;
 import org.springframework.beans.BeanUtils;
 
 import com.fashionkings.core.dto.ProductDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -58,6 +59,7 @@ public class Product {
 	private boolean deleted = Boolean.FALSE;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
 	@ManyToMany(cascade = {
@@ -69,6 +71,7 @@ public class Product {
     joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+	@JsonIgnore
 	private Set<Category> categories = new HashSet<>();
 
 	public long getId() {

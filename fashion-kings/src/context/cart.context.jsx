@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { getOpenCart } from "../services/category-service";
 
 
 const addCartItem = (cartItems, productToAdd) => {
@@ -33,6 +34,8 @@ export const CartContext = createContext({
   addItemToCart: () => {},
   removeItemFromCart: () => {},
   deleteItemFromCart: () => {},
+  getCart: () => {},
+  setItems: () => {},
   cartTotal: 0
 });
 
@@ -59,6 +62,14 @@ export const CartProvider = ({children}) => {
     setCartItems(deleteCartItem(cartItems, produtToDelete));
   }
 
+  const setItems = (items) => {
+    setCartItems(items);
+  }
+
+  const getCart = (customerId) => {
+    return getOpenCart(customerId);
+  }
+
   const value = {
     isCartOpen,
     setIsCartOpen,
@@ -66,6 +77,8 @@ export const CartProvider = ({children}) => {
     addItemToCart,
     removeItemFromCart,
     deleteItemFromCart,
+    setItems,
+    getCart, 
     cartTotal
   }
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>

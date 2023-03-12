@@ -1,4 +1,4 @@
-import { Fragment, useContext} from "react";
+import { Fragment, useContext, useEffect} from "react";
 import { Link, Outlet } from "react-router-dom";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -10,10 +10,21 @@ import "./navigation.styles.scss";
 const Navigation = () => {
 
   const  { currentCustomer, setCurrentCustomer } = useContext(CustomerContext);
-  const { isCartOpen } = useContext(CartContext);
+  const { isCartOpen, getCart, setItems } = useContext(CartContext);
   const signoutHandler = () => {
     setCurrentCustomer(null);
   }
+
+  useEffect(() => {
+    getCart(1).then(data => {
+      if(data && data.products){
+        console.log('********************************')
+        console.log(data);
+        console.log('********************************')
+        setItems(data.products)
+      }
+    })
+  }, [])
 
   
   return(

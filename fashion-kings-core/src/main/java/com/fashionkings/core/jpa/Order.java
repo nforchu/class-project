@@ -8,6 +8,8 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +21,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.springframework.beans.BeanUtils;
+
+import com.fashionkings.core.dto.Cart;
+import com.fashionkings.core.dto.CartItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -33,6 +39,10 @@ public class Order {
 	
 	@Column(name = "order_number")
 	private String orderNumber;
+	
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
 
 	@Column(name = "created")
 	private Date created;
@@ -50,6 +60,14 @@ public class Order {
 	@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
 	@JsonIgnore
 	private Customer customer;
+	
+	public enum OrderStatus {
+		OPEN, 
+		CONFIRMED,
+		CANCELED,
+		PROCESSING,
+		DELIVERED
+	}
 
 	public long getId() {
 		return id;
@@ -65,6 +83,15 @@ public class Order {
 
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
+	}
+	
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
 	}
 
 	public Date getCreated() {
@@ -139,11 +166,26 @@ public class Order {
 	@PrePersist
 	public void prePersist() {
 		this.created = new Date(System.currentTimeMillis());
+		this.status = OrderStatus.OPEN;
 	}
 
 	@PreUpdate
 	public void postUpdate() {
 		this.updated = new Date(System.currentTimeMillis());
+	}
+	
+	public Cart toCart () {
+		Cart cart = new Cart();
+		BeanUtils.copyProperties(this, cart, "products");
+		this.getItems().forEach(item -> {
+			CartItem cartItem = new CartItem();
+			BeanUtils.copyProperties(item, cartItem);
+			Product product = item.getProduct();
+			cartItem.setImage(product.getImage());
+			cartItem.setTitle(product.getTitle());
+			cart.addItem(cartItem);
+		});
+		return cart;
 	}
 	
 	

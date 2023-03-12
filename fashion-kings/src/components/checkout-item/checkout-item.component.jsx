@@ -5,7 +5,7 @@ import './checkout-item.styles.scss';
 const CheckoutItem = ({item}) => {
   
   const {addItemToCart, removeItemFromCart, deleteItemFromCart } = useContext(CartContext);
-  const {title, image, price, id, stockQuantity } = item;
+  const {title, image, price, id, quanity } = item;
 
   const addItemHander = () => addItemToCart(item);
   const removeItemHandler = () => removeItemFromCart(item);
@@ -22,7 +22,7 @@ const CheckoutItem = ({item}) => {
         <div 
           className='arrow'
           onClick={removeItemHandler}>&#10094;</div>
-        <span className='value'>{stockQuantity}</span>
+        <span className='value'>{quanity}</span>
         <div 
           className='arrow'
           onClick={addItemHander}>&#10095;</div>

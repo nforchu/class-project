@@ -15,8 +15,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "order_items")
+@Where(clause = "deleted = false")
 public class OrderItem {
 
 	@Id
@@ -45,10 +50,12 @@ public class OrderItem {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
+	@JsonIgnore
 	private Order order;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
+	@JsonIgnore
 	private Product product;
 
 	public long getId() {
